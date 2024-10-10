@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Actions;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\UserCollection;
 use App\Models\User;
 use DB;
 use Illuminate\Database\Query\Builder;
@@ -17,19 +17,19 @@ class GetUsersAction
         $this->query = DB::table('users');
     }
 
-    public function execute():UserResource
+    public function execute():UserCollection
     {
         return $this->getUsers();
     }
 
-    private function getUsers():UserResource
+    private function getUsers():UserCollection
     {
         if($this->param || $this->userType){
             $this->makeQuery();
             $users = $this->query->paginate(10);
-            return new UserResource($users);
+            return new UserCollection($users);
         }
-        return new UserResource(User::paginate(10));
+        return new UserCollection(User::paginate(10));
     }
 
     private function makeQuery():void
