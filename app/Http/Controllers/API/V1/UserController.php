@@ -28,8 +28,11 @@ class UserController extends Controller
         ],200);
     }
 
-    public function show()
+    public function show(User $user)
     {
+        return response()->json([
+            'data'=> new UserResource($user)
+        ],200);
     }
 
     public function update(Request $request, string $id)
