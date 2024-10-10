@@ -11,7 +11,7 @@ Route::prefix('v1')->group(function(){
 
     Route::middleware('auth:sanctum')->group(function(){
         Route::post('/logout',[AuthController::class,'logout']);
-        Route::apiResource('users',UserController::class)->except(['index','create']);
+        Route::apiResource('users',UserController::class)->except(['index','store']);
     });
 
     Route::middleware(['auth:sanctum','abilities:candidate-token'])->group(function(){ 

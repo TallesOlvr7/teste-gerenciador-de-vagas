@@ -4,10 +4,11 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Actions\GetUsersAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
-use User;
 
 class UserController extends Controller
 {
@@ -20,9 +21,11 @@ class UserController extends Controller
         return response()->json($users, 200);
     }
 
-    public function store(Request $request)
+    public function store(CreateUserRequest $request):JsonResponse
     {
-        //
+        return response()->json([
+            'data'=> new UserResource(User::create($request->validated()))
+        ],200);
     }
 
     public function show()
