@@ -19,9 +19,7 @@ class AuthController extends Controller
                 'message' => 'Email ou senha incorretos.',
             ], 400);
         }
-
-        $user = Auth::user();
-        $token = new GenerateTokenAction($user)->execute();
+        $token = (new GenerateTokenAction(Auth::user()))->execute();
         return response()->json([
             'message' => 'Authorized',
             'token'=> $token,

@@ -10,7 +10,7 @@ class GenerateTokenAction
     )
     {}
 
-    public function execute()
+    public function execute():string
     {
         return $this->generateToken();
     }

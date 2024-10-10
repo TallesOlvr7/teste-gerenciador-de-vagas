@@ -4,16 +4,20 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Actions\GetUsersAction;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use User;
 
 class UserController extends Controller
 {
 
-    public function index(Request $request):JsonResource
+    public function index(Request $request):JsonResponse
     {
-        $searchParam = $request->input('search');
-        return response()->json(new GetUsersAction($searchParam)->execute(), 200);
+        $key = $request->input('search');
+        $type = $request->input('type');
+        $users = (new GetUsersAction($key,$type))->execute();
+        return response()->json($users, 200);
     }
 
     public function store(Request $request)
@@ -21,9 +25,8 @@ class UserController extends Controller
         //
     }
 
-    public function show(string $id)
+    public function show()
     {
-        //
     }
 
     public function update(Request $request, string $id)
