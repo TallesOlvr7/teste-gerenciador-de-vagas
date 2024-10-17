@@ -26,7 +26,7 @@ class UserController extends Controller
     {
         return response()->json([
             'data' => new UserResource(User::create($request->validated()))
-        ], 200);
+        ], 201);
     }
 
     public function show(User $user): JsonResponse
@@ -36,11 +36,12 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, User $user):JsonResponse
     {
+        $user->update($request->validated());
         return response()->json([
             'message' => 'Dados atualizados com sucesso.',
-            'data' => new UserResource($user->update($request->validated()))
+            'data'=> new UserResource($user),
         ], 200);
     }
 
