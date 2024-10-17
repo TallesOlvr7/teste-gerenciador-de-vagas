@@ -16,7 +16,7 @@ Route::prefix('v1')->group(function(){
 
     Route::middleware(['auth:sanctum','abilities:candidate-token'])->group(function(){ 
         Route::apiResource('vacancies',VacancyController::class)->only(['index','show']);
-        Route::post('/apply',[UserController::class,'apply']);
+        Route::post('/apply/{user}',[UserController::class,'apply']);
     });
 
     Route::middleware(['auth:sanctum','abilities:recruiter-token'])->group(function(){
