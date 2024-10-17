@@ -26,10 +26,10 @@ class GetUsersAction
     {
         if($this->param || $this->userType){
             $this->makeQuery();
-            $users = $this->query->paginate(10);
+            $users = $this->query->paginate(20);
             return new UserCollection($users);
         }
-        return new UserCollection(User::paginate(10));
+        return new UserCollection(User::paginate(20));
     }
 
     private function makeQuery():void
