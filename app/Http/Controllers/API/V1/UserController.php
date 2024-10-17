@@ -58,8 +58,8 @@ class UserController extends Controller
     public function apply(Request $request, User $user)
     {
         try{
-            $userVacancies = (new ApplyForVacancyAction($user,$request->input['vacancy_id']))->execute();
-            
+            $userVacancies = (new ApplyForVacancyAction($user,$request->input('vacancy_id')))->execute();
+
             return response()->json([
                 'message'=>'Inscrição feita com sucesso.',
                 'data'=>$userVacancies,
