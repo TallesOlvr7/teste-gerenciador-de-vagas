@@ -5,17 +5,16 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class VacancyResource extends JsonResource
 {
 
     public function toArray(Request $request): array
     {
-        return [
+        return[
             'id'=>$this->id,
-			'name'=>$this->name,
-			'email'=>$this->email,
-            'vacancies'=>VacancyResource::collection($this->whenLoaded('vacancies')),
-			'type'=>$this->type,
+            'title'=>$this->title,
+            'description'=>$this->type,
+            'status'=>$this->status,
         ];
     }
 }
