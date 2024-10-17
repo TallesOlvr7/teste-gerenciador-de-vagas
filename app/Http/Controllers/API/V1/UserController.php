@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\API\V1;
 
+use App\Actions\ApplyForVacancyAction;
 use App\Actions\GetUsersAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -51,5 +53,21 @@ class UserController extends Controller
         return response()->json([
             'message'=>'Usuário deletado com sucesso.'
         ],200);
+    }
+
+    public function apply(Request $request, User $user)
+    {
+        try{
+            $userVacancies = (new ApplyForVacancyAction($user,$request->input['vacancy_id']))->execute();
+            
+            return response()->json([
+                'message'=>'Inscrição feita com sucesso.',
+                'data'=>$userVacancies,
+            ],200);
+        }catch(Exception $e){
+            return response()->json([
+                'error'=>$e->getMessage(),
+            ],400);
+        }
     }
 }
