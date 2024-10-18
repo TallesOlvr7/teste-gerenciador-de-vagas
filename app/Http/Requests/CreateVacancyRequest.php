@@ -17,7 +17,7 @@ class CreateVacancyRequest extends FormRequest
         return [
             'title'=>'required|max:255',
             'description'=>'required|max:500',
-            'type'=>'required|in:Pessoa Jurídica,Freelacer'
+            'type'=>'required|in:Pessoa Jurídica,Freelacer',
         ];
     }
 

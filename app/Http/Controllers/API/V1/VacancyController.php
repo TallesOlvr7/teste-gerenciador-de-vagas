@@ -4,6 +4,9 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Actions\GetVacanciesAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateVacancyRequest;
+use App\Http\Resources\VacancyResource;
+use App\Models\Vacancy;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -20,9 +23,11 @@ class VacancyController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(CreateVacancyRequest $request):JsonResponse
     {
-        //
+        return response()->json([
+            new VacancyResource(Vacancy::create($request->validated())),
+        ],200);
     }
 
     public function show(string $id)
