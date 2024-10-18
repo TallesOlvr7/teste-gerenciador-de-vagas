@@ -84,7 +84,7 @@ class GetVacanciesAction
         return $query->whereAny([
             'title',
             'description'
-        ], '=', "%{$this->param}%");
+        ], 'like', "%{$this->param}%");
     }
 
     private function withTypeFilter(Builder $query): Builder
@@ -94,6 +94,6 @@ class GetVacanciesAction
 
     private function withStatusFilter(Builder $query): Builder
     {
-        return $query->where('type', '=', $this->type);
+        return $query->where('status', '=', $this->status);
     }
 }

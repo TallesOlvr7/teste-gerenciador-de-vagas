@@ -13,7 +13,8 @@ class VacancyResource extends JsonResource
         return[
             'id'=>$this->id,
             'title'=>$this->title,
-            'description'=>$this->type,
+            'description'=>$this->description,
+            'type'=>$this->type,
             'status'=>$this->status,
         ];
     }
