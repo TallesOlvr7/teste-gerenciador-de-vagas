@@ -27,9 +27,9 @@ class GetUsersAction
         if($this->param || $this->userType){
             $this->makeQuery();
             $users = $this->query->paginate(20);
-            return new UserCollection($users);
+            return new UserCollection($users->vacancies());
         }
-        return new UserCollection(User::paginate(20));
+        return new UserCollection(User::vacancies()->paginate(20));
     }
 
     private function makeQuery():void

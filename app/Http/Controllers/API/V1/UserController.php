@@ -9,6 +9,7 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Auth;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -34,7 +35,7 @@ class UserController extends Controller
     public function show(User $user): JsonResponse
     {
         return response()->json([
-            'data' => new UserResource($user)
+            'data' => new UserResource($user->vacancies())
         ], 200);
     }
 
@@ -55,9 +56,10 @@ class UserController extends Controller
         ],200);
     }
 
-    public function apply(Request $request, User $user)
+    public function apply(Request $request):JsonResponse
     {
         try{
+            $user = Auth::user();
             $userVacancies = (new ApplyForVacancyAction($user,$request->input('vacancy_id')))->execute();
 
             return response()->json([

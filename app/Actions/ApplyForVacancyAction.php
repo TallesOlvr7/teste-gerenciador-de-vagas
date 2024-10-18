@@ -25,7 +25,7 @@ class ApplyForVacancyAction
         ->vacancies()
         ->attach($vacancy->id);
         
-        return new UserResource($this->user->load('vacancies'));
+        return new UserResource($this->user->vacancies());
     }
 
     private function getVacancyForApply():object
