@@ -22,6 +22,5 @@ Route::prefix('v1')->group(function(){
     Route::middleware(['auth:sanctum','abilities:recruiter-token'])->group(function(){
         Route::get('/users',[UserController::class,'index']);
         Route::apiResource('vacancies',VacancyController::class)->except(['index','show']);
-        Route::patch('/cancel', [VacancyController::class, 'cancel']);
     });
 });
