@@ -27,11 +27,11 @@ class GetVacanciesAction
         if ($this->param || $this->status || $this->type) {
             $this->query = $this->makeQuery($this->query);
             return new VacancyCollection(
-                $this->query->paginate(20)
+                $this->query->paginate(20)->withQueryString()
             );
         }
 
-        return new VacancyCollection($this->query->where('status', '=', 'Aberta')->paginate(20));
+        return new VacancyCollection($this->query->where('status', '=', 'Aberta')->paginate(20)->withQueryString());
     }
 
     private function makeQuery(Builder $query): Builder
