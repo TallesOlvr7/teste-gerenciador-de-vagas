@@ -15,6 +15,7 @@ return new class extends Migration
             $table->longText('description');
             $table->enum('type',['Pessoa Jurídica','Freelancer']);
             $table->enum('status',['Aberta', 'Fechada'])->default('Aberta');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }
